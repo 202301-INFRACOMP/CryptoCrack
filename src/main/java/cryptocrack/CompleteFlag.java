@@ -8,15 +8,15 @@ public class CompleteFlag {
 
     }
 
-    public boolean getStatus() {
+    public synchronized boolean isCompleted() {
         return flag;
     }
 
-    public void complete() {
+    public synchronized void complete() {
         flag = true;
     }
 
-    public void reset() {
+    public synchronized void reset() {
         flag = false;
     }
 }

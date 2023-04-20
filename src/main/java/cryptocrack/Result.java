@@ -2,8 +2,7 @@ package cryptocrack;
 
 public class Result {
     private String message;
-    private String salt;
-
+    
     public Result() {
     }
 
@@ -11,12 +10,8 @@ public class Result {
         return message;
     }
 
-    public String getSalt() {
-        return salt;
-    }
 
-    public void setResult(String message, String salt) {
+    public void setResult(String message) {
         this.message = message;
-        this.salt = salt;
     }
 }

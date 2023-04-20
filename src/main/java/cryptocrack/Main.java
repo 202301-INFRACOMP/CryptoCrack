@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final var tmp = new Generator();
         final var sc = new Scanner(System.in);
 
         System.out.println("Welcome to CryptoHack!!!");

@@ -24,6 +24,8 @@ public class CryptoHack implements Runnable {
 
     @Override
     public void run() {
+        var startTime = System.nanoTime();
+
         MessageDigest hasher;
         try {
             hasher = MessageDigest.getInstance(hashingAlgorithm);
@@ -34,6 +36,16 @@ public class CryptoHack implements Runnable {
         final var flag = new CompleteFlag();
         final var result = new Result();
         executor.execute(new HashCracker(hasher, hash, salt, flag, result));
+
+        while (!flag.isCompleted()) {}
+
+        var endTime = System.nanoTime();
+
+        var elapsedTime = endTime - startTime;
+        var timeInSeconds = elapsedTime * (long)1e6;
+
+        System.out.printf("The string used to generate %s is %s. With salt %s.\n", hash, result.getMessage(), salt);
+        System.out.printf("It took %d seconds to brute-force the hash.", timeInSeconds);
 
         executor.shutdown();
     }

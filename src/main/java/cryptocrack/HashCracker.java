@@ -1,6 +1,8 @@
 package cryptocrack;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 public class HashCracker implements Runnable {
     private final MessageDigest hasher;
@@ -23,9 +25,31 @@ public class HashCracker implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            // hasher.digest()
-            // if coincide .. then
+        while (!flag.isCompleted()) { 
+            String searchWord = "hola";
+        
+            var payload = (salt + searchWord).getBytes();
+            var bytes = hasher.digest(payload);
+            
+            var searchHash = bytesToHex(bytes);
+
+            if (searchHash.equals(hash))
+            {
+                result.setResult(searchWord);
+                flag.complete();
+            }
         }
+    }
+
+    private static String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString().toUpperCase();
     }
 }
