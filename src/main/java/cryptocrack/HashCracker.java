@@ -33,7 +33,7 @@ public class HashCracker implements Runnable {
             
             var searchHash = bytesToHex(bytes);
 
-            if (searchHash.equals(hash))
+                if (searchHash.equals(hash))
             {
                 result.setResult(searchWord);
                 flag.complete();

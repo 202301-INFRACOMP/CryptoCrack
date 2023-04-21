@@ -42,10 +42,10 @@ public class CryptoHack implements Runnable {
         var endTime = System.nanoTime();
 
         var elapsedTime = endTime - startTime;
-        var timeInSeconds = elapsedTime * (long)1e6;
+        var timeInSeconds = elapsedTime * (float)((1*Math.pow(10,-9)));
 
         System.out.printf("The string used to generate %s is %s. With salt %s.\n", hash, result.getMessage(), salt);
-        System.out.printf("It took %d seconds to brute-force the hash.", timeInSeconds);
+        System.out.printf("It took %f seconds to brute-force the hash.", timeInSeconds);
 
         executor.shutdown();
     }
