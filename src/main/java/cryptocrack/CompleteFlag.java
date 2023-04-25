@@ -2,21 +2,19 @@ package cryptocrack;
 
 public class CompleteFlag {
 
-    private boolean flag = false;
+  private boolean flag = false;
 
-    public CompleteFlag() {
+  public CompleteFlag() {}
 
-    }
+  public synchronized boolean isCompleted() {
+    return flag;
+  }
 
-    public synchronized boolean isCompleted() {
-        return flag;
-    }
+  public synchronized void complete() {
+    flag = true;
+  }
 
-    public synchronized void complete() {
-        flag = true;
-    }
-
-    public synchronized void reset() {
-        flag = false;
-    }
+  public synchronized void reset() {
+    flag = false;
+  }
 }

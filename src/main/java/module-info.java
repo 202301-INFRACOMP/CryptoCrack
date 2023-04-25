@@ -1,2 +1,1 @@
-module cryptocrack {
-}
+module cryptocrack {}
