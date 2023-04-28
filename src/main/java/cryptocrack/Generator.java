@@ -1,5 +1,10 @@
 package cryptocrack;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -41,26 +46,62 @@ public class Generator implements Iterator<String> {
 
     return sb.reverse().toString();
   }
+
+  public int getLongitudActual() {
+    return longitudActual;
+  }
+
+  public static void main(String[] args) throws IOException {
+    Generator iter = new Generator("abcdefghijklmnopqrstuvwxyz", 7);
+    String ruta = "src/main/java/cryptocrack/data/a.txt";
+    File archivo = new File(ruta);
+    FileWriter fw = new FileWriter(archivo);
+    BufferedWriter bw;
+    bw = new BufferedWriter(fw);
+    PrintWriter pw = new PrintWriter(bw);
+
+    String ruta2 = "src/main/java/cryptocrack/data/b.txt";
+    File archivo2 = new File(ruta2);
+    FileWriter fw2 = new FileWriter(archivo2);
+    BufferedWriter bw2;
+    bw2 = new BufferedWriter(fw2);
+    PrintWriter pw2 = new PrintWriter(bw2);
+
+    String ruta3 = "src/main/java/cryptocrack/data/c.txt";
+    File archivo3 = new File(ruta3);
+    FileWriter fw3 = new FileWriter(archivo3);
+    BufferedWriter bw3;
+    bw3 = new BufferedWriter(fw3);
+    PrintWriter pw3 = new PrintWriter(bw3);
+
+    try {
+      while (iter.hasNext()) {
+        if (iter.longitudActual <= 5) {
+          System.out.println("Entro a A");
+          pw.write(iter.next());
+          pw.write("\n");  
+        }
+        if (iter.longitudActual == 6) {
+          System.out.println("Entro a B");
+          pw2.write(iter.next());
+          pw2.write("\n");  
+        }
+        if (iter.longitudActual == 7) {
+          System.out.println("Entro a C");
+          pw3.write(iter.next());
+          pw3.write("\n");  
+        }
+      }
+      pw.close();
+      bw.close();
+      pw2.close();
+      bw2.close();
+      pw3.close();
+      bw3.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    System.out.println("Terminó...");
+  }
 }
-//     public static void main(String[] args) throws IOException {
-//         String ruta = "src/main/java/cryptocrack/data/permutations.txt";
-//         File archivo = new File(ruta);
-//         FileWriter fw = new FileWriter(archivo);
-//         BufferedWriter bw;
-//         bw = new BufferedWriter(fw);
-//         PrintWriter pw = new PrintWriter(bw);
-//         Generator iter = new Generator("abcdefghijklmnopqrstuvwxyz", 7);
-//         try {
-//             while (iter.hasNext()) {
-//                 pw.write(iter.next());
-//                 pw.write("\n");
-//                 System.out.println("Imprimiendo...");
-//             }
-//             pw.close();
-//             bw.close();
-//         } catch (IOException e) {
-//             // TODO Auto-generated catch block
-//             e.printStackTrace();
-//         }
-//     }
-// }
